@@ -1,142 +1,130 @@
-# Golang 第一轮考核
+# 鸿蒙第一轮考核
 
-## 目的
+## 参考资料
 
-Go语言基本语法
+- [DevEco Studio 的使用](https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101717494752698457)
+- [TypeScript 教程](https://www.runoob.com/typescript/ts-tutorial.html)
+- [ArkTS 语法介绍](https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101717496870909384)
+- [面向对象](https://baike.baidu.com/item/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1)
 
-- 条件，选择
-- 循环
-- 键值对
-- 切片，集合
-- 函数
-- 通道 Channel
-- Go协程 Goroutine
+## 知识点
+
+- 配置编译环境
+- 输入输出
+- 选择结构、循环结构
+- 方法
+- 数组
+
+- 封装、继承、多态、接口
+- 异常处理
+- 集合
+- 泛型
 
 ## 任务
 
-## Task1.基础语法
-请使用golang完成下列任务
+- 进行开发环境配置，下载安装 DevEco Studio，申请并安装模拟器（即使你目前使用华为手机，你的系统也通常不是真正意义上的 HarmonyOS，因此后续的界面开发需要用到模拟器）
+- 完成下面两项在线刷题网站的任务，当然写的越多越好，尽可能的熟悉语言语法（ts 是 js 的扩展，ArkTS 是 ts 的扩展，因此在这个任务中可以选择使用 ts(优先) 或 js 完成）
+  - 进行[基础编程题目集 (pintia.cn)](https://pintia.cn/problem-sets/14/exam/problems/type/7)练习，并达到至少一百分
+  - 完成[27. 移除元素 - 力扣（LeetCode）](https://leetcode.cn/problems/remove-element/)
+    > 注意：提交你的分数的截图或者可以其他证明你已经完成的截图
+- 宠物店
 
-1. 洛谷P1001：https://www.luogu.com.cn/problem/P1001
-2. 洛谷P1046：https://www.luogu.com.cn/problem/P1046
-3. 洛谷P5737：https://www.luogu.com.cn/problem/P5737
-4. AtCoder ARC017A：https://www.luogu.com.cn/problem/AT_arc017_1
-   - 对于这道题，请编写一个判断质数的函数`isPrime(x int) bool` ，并且在主函数中调用它
+> 用代码来写一个自己的宠物店，题目有点长耐心看~
+> 完成下面的类
+>
+> **开一家宠物店，宠物店要有动物还要有顾客**
 
-5. 创建一个**切片(slice)** 使其元素为数字`1-50`，从切⽚删掉数字为`3`的倍数的数，并且在末尾再增加⼀个数`114514`，输出切⽚。
+**1. 一个 Animal 动物类 (接口类 interface)**
 
-**输出示例**
+- 变量:
+  - 动物名(String)
+  - 年龄(number)
+  - 性别
+  - 价格(number)
+  - ....
+- 方法:
+  - 一个全参构造方法
+  - 一个抽象的 toString() 方法
+  - ........
 
-```go
-[1 2 4 5 7 8 10 11 13 14 16 17 19 20 22 23 25 26 28 29 31 32 34 35 37 38 40 41 43 44 46 47 49 50 666]
-```
+**2. 中华田园犬类 (extends Animal)**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252201019.jpg" alt="img" style="zoom:3%;" />
 
-### Bonus
+- 变量: isVaccineInjected(boolean 是否注射狂犬病疫苗)
+- 价格 100 元
 
-1. 写一个99乘法表，并且把结果保存到同⽬录下ninenine.txt，⽂件保存命名为"6.go"。
+**3. 猫猫类 (extends Animal)**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252202619.png" alt="image-20221025220229577" style="zoom:15%;" />
 
-2. 回答问题：Go语言中的切片和数组的区别有哪些？答案越详细越好。Go中创建切片有几种方式？创建map
-   呢？
+- 价格 200 元
 
-3. 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那
-   两个 整数，并返回它们的数组下标。
+**4. 你喜欢的其他动物.....**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252202563.png" alt="image-20221025220257537" style="zoom:50%;" />
 
-   你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+- 自由选择 合理就行
 
-   你可以按任意顺序返回答案。
+**5. 顾客类 Customer**
 
-   **示例 1：**
+- 成员变量:
+  - 顾客名字(String)
+  - 到店次数(number)
+  - 最新到店时间
+- 方法
+  - 重写 toString() 方法, 要求按一定格式输出客户的所有信息
 
-   > 输入：nums = [2,7,11,15], target = 9
-   > 输出：[0,1]
-   > 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 
+**6. 宠物店接口 AnimalShop (interface)**
 
-   **示例2**
+你的宠物店需要有一些基础功能:
 
-   > 输入：nums = [3,2,4], target = 6
-   > 输出：[1,2]
+- 买入新动物(需要的参数自己决定)
+- 招待客户(Customer)
+- 歇业
 
-* 是否有复杂度`O(n)`的算法？
+**7. MyAnimalShop 自己的宠物店 (implements AnimalShop)**
 
-3. 运行下面代码，在你认为重要的地方写好注释，同时回答下面这些问题
-   - 这个代码实现了什么功能？
-   - 这个代码利用了golang的什么特性？
-   - 这个代码相较于普通写法，是否有性能上的提升？（性能提升：求解速度更快了）
+- 变量:
 
+  - 店的余额
+  - 一个存放动物的列表 (Array)
+  - 一个顾客列表留作纪念
+  - 是否正在营业
+  - ....
 
-```go
-package main
+- 实现接口中的方法
 
-import (
-	"fmt"
-)
+  - 买入动物 -> 买入一只动物，记得在动物列表中添加，
 
-func generate(ch chan int) {
-	for i := 2; ; i++ {
-		ch <- i
-	}
-}
+    如余额不足则抛出异常 InsufficientBalanceError
 
-func filter(in chan int, out chan int, prime int) {
-	for {
-		num := <-in
-		if num%prime != 0 {
-			out <- num
-		}
-	}
-}
+  - 招待客户 -> 接受客户参数，在顾客列表中加入新顾客，
 
-func main() {
-	ch := make(chan int)
-	go generate(ch)
-	for i := 0; i < 6; i++ {
-		prime := <-ch 
-		fmt.Printf("prime:%d\n", prime)
-		out := make(chan int)
-		go filter(ch, out, prime)
-		ch = out
-	}
-}
-```
+    出售动物，如果店内没有动物，抛出 AnimalNotFoundError。
 
-## Task2. Git与Github
+    通过 toString 输出动物信息，并把钱入账，将动物移除列表
 
-现在我们来讨论一下Git和Github, 这是一个计算机学生绕不开的话题.不论你计划是升学还是就业,掌握Git和Github对你的帮助都是莫大的.
+  - 歇业 -> 输出当天光顾的客户的列表信息，计算并输出一天的利润
 
-目前西二在线编写了如下的文档: [Git与Github的超容易入门](https://west2-online.feishu.cn/wiki/Lsz9w3CiGinXzgkevtmceHZknrf),这个文档简单的介绍了如何使用git和github,但是更多的功能仍然需要你自己去探索,同时,这个文档并没有编写完毕
+**8. 自定义异常类**
 
-我们希望可以通过这个文档让你快速上手git, 但光看文档肯定是没有用的,你还需要完成下列任务
+- 异常类 (AnimalNotFountError) 没找到动物异常，店内没有动物可买时抛出
+- 异常类 (InsufficientBalanceError) 余额不足异常时抛出
+- 两个异常类均继承自 Error, 异常中需要携带错误信息，方便捕获后处理和查看
 
-- 如果你没有自己的Github账号,请创建一个自己的Github账号
-- 为你的Github账号添加一个头像
-- 为你的Github账号开启2FA(多因素账号登录)
-- 为你的Github账号写一个README(请去网上查阅如何美化自己的Github主页)
-- 访问这个仓库[[Github-Introduction](https://github.com/west2-online-reserve/Github-Introduction)],在这个仓库中添加一个新的issue,模板选择[Bug Report],按照模板内的要求填写内容(关于bug的复原部分可以随便写,比如click xxx),发布这个issue
-- fork上面这个仓库,在fork的仓库中新增一个READDME.md文件,在这个文件中填写你的Github ID
-- 将上一步的修改提交到你fork的仓库,并且给主仓库提交一个关于这个修改的pr
+**9. 一个 Test 类, 用于测试你写的类功能是否正常**
 
-**注意:fork仓库并添加文件这个步骤,请在你的电脑本地操作,之后push到你fork的仓库.不要试图直接在Github上面操作,是可以区分出在Github上面操作和本地操作后push的**
+- 创建一个宠物店实例，给定余额，初始化动物列表，一个空的顾客列表
+- 测试买入动物，招待顾客，歇业
+- 建议多拿点例子测试，发现 bug 可以马上改，多考虑代码严谨性
+- 本任务没有创建和使用图形用户界面（GUI），使用控制台进行输入和输出
 
-### Bonus
+## 提示
 
-1. 请注意你的commit message,你可以自行查找一些git commit规范,我们希望你可以先建立起一定的规范操作
-2. 请创建一个仓库,这个仓库存放着你本次考核的代码.仓库名和其他内容不做要求,但是我们希望你的一切操作都看起来是**具有一定规范**的
+- 学习资料择需学习即可，不需要全部学习
 
-在未来的工程项目中,规范是非常重要但很难掌握的一个内容,你未来势必不会单打独斗,你会和其他不同的人一起创造、修缮你们的伟大工程.同时,一个工程可能会持续很长时间,可能最初的人因为各种原因被新来的人接替,这时候规范问题更重要了:你该如何使用一定的规范,让新来的人可以很快的上手你们的伟大工程?这是一个值得思考的问题!
+- 参数名请使用有意义的单词或短语，要求**见名知意**
 
-请务必注意你的规范问题.以及,请务必学好git和github.
+- 构造函数与 get/set 等自行斟酌
+- 部分变量选择尽量符合实际
+- 注意命名规范，使用驼峰命名法
+- 注意代码格式规范，可使用自带的格式化快捷键 _ctrl+alt+L_ 进行代码格式化
+- 除了面向对象，希望大家也能有面向 google/github/必应/博客园/百度 学习的能力
+- 如果有实在写不完或者不理解的部分，可以加一些注释写一点思路或者想法 (可以用`//TODO`来标记未完成的部分)
 
-## 要求
-
-1.  不要抄袭 
-2.  不要抄袭
-3.  不要抄袭
-4.  遇到不会的地⽅时，⾸先尝试⾃⼰去解决，可以去百度、⾕歌上寻求帮助，能⽤`搜索引擎`解决**⾃⼰**的问题是⼀项⾮常⾮常重要的能⼒。
-
-## 参考
-
-- 菜鸟教程Go语言 https://www.runoob.com/go/go-tutorial.html
-- B站老男孩Go语言入门视频 https://www.bilibili.com/video/BV1fz4y1m7Pm
-- 七天入门Go语言 https://blog.csdn.net/weixin_45304503/category_11253946.html
-- go语言中文社区 https://learnku.com/go
-
+- 大家刚开始写都会有些懵懵的，不知道在写啥，不过这次只要能写出来能跑就行了，不懂的以后会慢慢再接触了解的。

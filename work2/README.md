@@ -1,74 +1,55 @@
-# Golang 第二轮考核
+# 鸿蒙第二轮考核
 
-## 目的
+## 参考资料
 
-- 学习并使⽤go module进⾏第三⽅库的安装
-- 了解http协议和web的⼯作原理
-- 静态数据与动态数据的爬取
-- 学习使⽤关系型数据库，如：MySQL（面向大二同学）
+- [应用程序框架基础](https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101717497122909477)
+- [从简单的页面开始](https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101717497398588123)
+- [开发文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/application-dev-guide-V5)
+- 教程内容各有千秋，每个人的学习习惯也不同，我们提供的教程也只是九牛一毛，希望大家可以多多尝试，找到适合自己的方法。
+- 注意善用百度、Google 和 B 站大学即可，有不会、找不到的，也可以随时在群里或者直接私聊问。只要能学到东西，就算是坐悟也是可以的！
 
-## 任务
+## 知识点
 
-### 爬取福大通知、文件系统
+常用控件和常见布局的使用
+Ability 之间的跳转和通信
 
-> 爬取福州大学通知、文件系统 [点击访问](https://info22.fzu.edu.cn/lm_list.jsp?wbtreeid=1460)
+## 考核内容
 
-- 包含发布时间，作者，标题以及正文。
-- 可自动翻页（爬虫可以自动对后续页面进行爬取，而不需要我们指定第几页）
-- 范围：2020年1月1号 - 2021年9月1号（不要爬太多了）。
+简单仿一个 B 站动态界面
 
-#### Bonus
+1. 两个 Ability
 
-1. 使用并发爬取，同时给出加速比（加速比：相较于普通爬取，快了多少倍）
-2. 搜集每个通知的访问人数
-3. 将爬取的数据存入数据库，原生SQL或ORM映射都可以
+   - MainAbility、DetailAbility
+   - 将 MainAbility 设为启动页
 
-### 爬取Bilibili视频评论
+2. 在 MainAbility 中：
 
-> 爬取  [这个视频](https://www.bilibili.com/video/BV12341117rG) 的全部评论
+   - 上方一个横向滑动的 Grid 用来显示你关注的 up 主头像和名字
+   - 下方一个 Swiper，其 item 包括一个 Text 显示动态简介，一个 Image 用来显 示动态信息，Image 要求能最大程度显示图片所有内容并且不变形（设置 objectFit）
+   - 单击 up 主头像或名字时，下方的内容显示更改为该 up 的动态信息（Swiper 的 item 变为对应 up 的 item）
+   - Swiper 可左右滑动切换不同 up 的动态信息
 
-- 全部评论，包含子评论
+   ```
+   动态信息加载本地图片文件即可，不需要实现网络请求，页面参考B站
+   ```
 
-#### Bonus
+3. 长按 up 主头像或名字跳转 DetailAbility（用 Want 传递信息），在 DetailAbility 中：
 
-1. 给出Bilibili爬虫检测阈值（请求频率高于这个阈值将会被ban）
-2. 给出爬取的流程图，使用mermaid
-3. 给出接口返回的json中每个参数所代表的意义
+   - 显示该 up 主的个人信息（名字、头像、粉丝数等）
+   - 一个取关按钮，点击后 Toast 提示取关成功 向上个 Ability 返回数据
+   - 关闭 DetailAbility 页面，返回到 MainAbility 页面后，删除被取关的 up 并刷新界面
 
-## 参考
 
-- **请求库**
-  - `net/http`
-- **解析库**
-  - `github.com/PuerkitoBio/goquery`
-  - `github.com/antchfx/htmlquery`
-  - `re`
-- **数据库驱动**
-  - `github.com/go-sql-driver/mysql`
+## 四、注意事项与其他
 
-- 抓包：Fiddler、Proxyman、Charles、浏览器F12自带的网络抓包等
-- Go Module : https://www.bilibili.com/video/BV1w64y197wo?spm_id_from=333.999.0.0
-- 国内代理：https://goproxy.cn/
-- B站黑马程序员**Go爬虫**：https://www.bilibili.com/video/BV1Nt411H7sP?p=1
-- Go爬虫知识总结：https://blog.csdn.net/weixin_45304503/article/details/120390989
-- Go爬虫基础系列文章：
-    - https://cuiqingcai.com/5465.html
-    - https://cuiqingcai.com/5476.html
-    - https://cuiqingcai.com/5484.html
-    - https://cuiqingcai.com/5487.html
-    - https://cuiqingcai.com/5491.html
-- Go语⾔中⽂⽹：https://studygolang.com
-- 深入浅出BloomFilter原理：https://zhuanlan.zhihu.com/p/140545941
+1. 考核 **使用 ArkTS** 完成
+2. **整个项目上传** 至 github
+3. 请注意 **规范头像，动态图片等等文件的位置** 参考[资源使用](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/resource-usage-V5)
+4. up 数量至少 4 个
+5. 考核对于 **项目结构** 比较严格，包括后续的考核项目都要有合理的架构划分。提交的时候一定要整个项目提交到 github 上，如果 **无法运行可能会影响考核通过**
+6. 代码 **尽量简洁** 不要太复杂！！！
+7. MainAbility 页面提供如下**参考** ，**不用一模一样** ，有不清楚的敲我们~
 
-## 提示
-
-- 本次考核难度较大，请**尽早开始学习**
-- 已经完成的同学可以先预习⼀下**gin**和**RESTful API**以及**数据库**
-- 请多多参考网络资料，爬虫部分网络资料非常多
-
-### 推荐上手顺序
-
-1. 了解爬虫原理与网页结构（不需要了解太深）
-2. 根据参考中给的几个库，查找对应的使用方法
-3. 选择合适的库，或者择取其他你认为更优秀的库，来编写爬虫程序
-
+![img](https://github.com/west2-online/learn-HarmonyOS/blob/0d60fb68ea3f42e9ccc5136862f1dfd33aaffb6a/img/round-2.jpg)
+```
+````

@@ -47,12 +47,12 @@
   - 一个抽象的 toString() 方法
   - ........
 
-**2. 中华田园犬类 (extends Animal)**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252201019.jpg" alt="img" style="zoom:3%;" />
+**2. 中华田园犬类 (implements Animal)**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252201019.jpg" alt="img" style="zoom:3%;" />
 
 - 变量: isVaccineInjected(boolean 是否注射狂犬病疫苗)
 - 价格 100 元
 
-**3. 猫猫类 (extends Animal)**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252202619.png" alt="image-20221025220229577" style="zoom:15%;" />
+**3. 猫猫类 (implements Animal)**<img src="https://gitee.com/sky-dog/note/raw/master/img/202210252202619.png" alt="image-20221025220229577" style="zoom:15%;" />
 
 - 价格 200 元
 

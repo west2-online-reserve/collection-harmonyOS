@@ -1,3 +1,42 @@
+
+async function nodejs_input(prompt){
+    process.stdout.write(prompt);
+    return new Promise((resolve) => {
+        process.stdin.once('data', (data) => {
+            resolve(data.toString().trim());
+        });
+    });
+}
+
+
+async function quickjs_input(prompt){
+    console.log(prompt);
+    return new Promise((resolve) => {
+        resolve("exit");
+    }
+}
+
+
+
+let platform = 'quickjs'
+
+try{
+    std
+} catch {
+    platform = 'nodejs'
+}
+switch(platform){
+    case 'nodejs':
+        var input = nodejs_input;
+        break;
+    case 'quickjs':
+        var input = quickjs_input;
+        break;
+    default:
+        throw new Error('Unknown platform');
+}
+console.log('Platform:', platform);
+
 // ====== ERROR ======
 class InsufficientMoneyError extends Error {
     constructor(message) {
@@ -127,36 +166,39 @@ class AnimalShop{
 }
 
 
-async function input(prompt){
-    process.stdout.write(prompt);
-    return new Promise((resolve) => {
-        process.stdin.once('data', (data) => {
-            resolve(data.toString().trim());
-        });
-    });
-}
 
 
-async function main(){
+
+const main = async () => {
     let my_shop = new AnimalShop(1000);
     while(true){
         let cmd = await input('Enter command: ');
         switch(cmd){
             case 'exit':
+                console.log("main exit");
                 return;
-            case 'buy':
+            case 'buy':{
                 let pet = await input('Enter pet name: ');
                 let age = await input('Enter pet age: ');
+                let gen = await input('Enter pet gender: ')
+                pet = pet[0].toUpperCase() + pet.slice(1).toLowerCase();
+                let animal_class = eval(pet);
+                my_shop.purchase(new animal_class(parseInt(age), gen));
                 break;
+            }
             case 'help':
-                console.log('Commands: buy, sell, tend, stop, exit');
+                console.log('Commands: buy, sell, stop, exit');
                 break;
-            case 'sell':
+            case 'sell':{
                 let who = await input('Enter customer name: ');
                 let pet = await input('Enter animal name: ');
-
+                my_shop.tend(new Customer(who).buy(pet));
+                break;
+            }
+            case 'stop':
+                break;
+        }
     }
-} 
+}
 
-
-main()
+await main();

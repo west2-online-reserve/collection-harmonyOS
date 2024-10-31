@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 interface Animal{
     name:string;
     age:number;
@@ -128,3 +129,6 @@ class Test{
 }
 
 Test.test();
+=======
+
+>>>>>>> 93723918e61c29ab27d371fb25a09e70b3cb45a7

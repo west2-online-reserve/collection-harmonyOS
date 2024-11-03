@@ -13,29 +13,11 @@ async function quickjs_input(prompt){
     console.log(prompt);
     return new Promise((resolve) => {
         resolve("exit");
-    }
+    });
 }
 
 
-
-let platform = 'quickjs'
-
-try{
-    std
-} catch {
-    platform = 'nodejs'
-}
-switch(platform){
-    case 'nodejs':
-        var input = nodejs_input;
-        break;
-    case 'quickjs':
-        var input = quickjs_input;
-        break;
-    default:
-        throw new Error('Unknown platform');
-}
-console.log('Platform:', platform);
+const input = nodejs_input;
 
 // ====== ERROR ======
 class InsufficientMoneyError extends Error {
@@ -160,6 +142,9 @@ class AnimalShop{
         this.todays_customers.push(customer);
     }
     stop() {
+        for(let customer of this.todays_customers){
+            console.log(`Customer: ${customer.name} bought ${customer.wanted_pet}`);
+        }
         this.history_customers.push(this.todays_customers);
         this.todays_customers = [];
     }
@@ -196,7 +181,7 @@ const main = async () => {
                 break;
             }
             case 'stop':
-                break;
+                my_shop.stop();
         }
     }
 }
